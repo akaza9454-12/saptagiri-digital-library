@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saptagiri Digital Library</title>
+<style>
+body{font-family:Arial;background:#f1f5fb;margin:0;color:#142b50}
+header{background:#102b55;color:white;padding:25px}
+main{padding:20px;max-width:600px;margin:auto}
+.card{background:white;padding:20px;border-radius:15px;margin:15px 0}
+input,select,button{width:100%;padding:14px;margin:10px 0;border-radius:8px;box-sizing:border-box;font-size:16px}
+input,select{border:1px solid #bbb}
+button{background:#174d91;color:white;border:0;font-weight:bold}
+.tile{background:white;padding:20px;border-radius:12px;text-align:center;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hidden{display:none}
+.small{font-size:13px;color:#68778d}
+.member{padding:10px;border-bottom:1px solid #ddd}
+</style>
+</head>
+<body>
+<header>
+<h2>📚 Saptagiri Digital Library</h2>
+<p>Student Library Portal</p>
+</header>
+<main>
+<section id="login">
+<div class="card">
+<h2>Welcome Student!</h2>
+<p>Login to your digital library</p>
+<input id="srn" placeholder="Enter Demo SRN">
+<select id="branch">
+<option value="">Select Branch</option>
+<option>CSE</option><option>ISE</option><option>ECE</option>
+<option>EEE</option><option>AI & ML</option><option>Data Science</option>
+</select>
+<button onclick="login()">Login</button>
+<p class="small">Prototype only. Use a dummy SRN.</p>
+</div>
+</section>
+<section id="home" class="hidden">
+<div class="card"><h2 id="welcome"></h2><p>Welcome to your college library.</p></div>
+<div class="grid">
+<div class="tile" onclick="page('search')">🔍<p>Search Books</p></div>
+<div class="tile" onclick="page('availability')">📚<p>Availability</p></div>
+<div class="tile" onclick="page('sections')">🗂️<p>Library Sections</p></div>
+<div class="tile" onclick="page('members')">👥<p>Group Members</p></div>
+</div>
+<div class="card"><button onclick="logout()">Logout</button></div>
+</section>
+<section id="search" class="hidden card">
+<button onclick="page('home')">← Back</button>
+<h2>Search Books</h2>
+<p>Book catalogue will be connected later.</p>
+</section>
+<section id="availability" class="hidden card">
+<button onclick="page('home')">← Back</button>
+<h2>Book Availability</h2>
+<p>Availability data is pending.</p>
+</section>
+<section id="sections" class="hidden card">
+<button onclick="page('home')">← Back</button>
+<h2>Library Sections</h2>
+<p>Verified section details will be added later.</p>
+</section>
+<section id="members" class="hidden card">
+<button onclick="page('home')">← Back</button>
+<h2>Group Members</h2>
+<p>Department of Computer Science and Engineering</p>
+<div class="member">1. Prajwal By</div>
+<div class="member">2. Prashant Singh</div>
+<div class="member">3. Prajwal Kr</div>
+<div class="member">4. Pranav M Naik</div>
+<div class="member">5. Prajwal</div>
+<div class="member">6. Prajwal S T</div>
+<div class="member">7. Prajwal K B</div>
+<div class="member">8. Prathamraj Aili</div>
+<div class="member">9. Prabhugowda P</div>
+<div class="member">10. Prajwal S M</div>
+<div class="member">11. Prajwal C Hebbal</div>
+<div class="member">12. Prajwal S Gowdar</div>
+</section>
+</main>
+<script>
+function login(){
+let s=document.getElementById('srn').value.trim();
+let b=document.getElementById('branch').value;
+if(!s||!b){alert('Enter demo SRN and select branch');return;}
+sessionStorage.setItem('srn',s);
+document.getElementById('welcome').innerText='Welcome '+s+'!';
+page('home');
+}
+function page(p){
+['login','home','search','availability','sections','members'].forEach(x=>document.getElementById(x).classList.add('hidden'));
+document.getElementById(p).classList.remove('hidden');
+}
+function logout(){sessionStorage.clear();page('login');}
+</script>
+</body>
+</html>
